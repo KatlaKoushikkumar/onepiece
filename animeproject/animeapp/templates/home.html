@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background: #242c8c;
+        /*background-size: cover;*/
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: white;
+    }
+</style>
+
+<h1>Anime List</h1>
+<form method="get">
+    <input type="text" name="q" placeholder="Search anime..." value="{{ request.GET.q }}">
+    <button type="submit">Search</button>
+</form>
+
+<div class="anime-grid">
+    {% for anime in animes %}
+        <div class="anime-card">
+            <img src="{% static 'animes/images/blackclover.jpg' %}" alt="{{ anime.title }}">
+            <h3>{{ anime.title }}</h3>
+            <a href="{% url 'anime_detail' anime.id %}">View Details</a>
+        </div>
+    {% empty %}
+        <p>No anime found.</p>
+    {% endfor %}
+</div>
+<div class="slideshow-container">
+    <div class="slide">
+        <img class="slide-image" src="{% static 'animes/images/ruroni_full.jpg' %}" alt="Slide 1">
+        <div class="slide-text">
+            <span class="highlight">#1 SPOTLIGHT</span>
+            <h1>Rurouni Kenshin:<br>Meiji Kenkaku Romantan</h1>
+            <p>A wandering swordsman protects the people of Meiji-era Japan.In the late 19th century, as the cruel times of the Bakumatsu period came to a close, a new Meiji era marked the age of restoration for Japan. With the war over, its infamous hero Hitokiri Battousai disappeared into thin air, leaving only his legend behin...+ More</p>
+            <a href="#" class="explore-button">Explore Anime</a>
+        </div>
+    </div>
+
+    <div class="slide">
+        <img class="slide-image" src="{% static 'animes/images/bleach_full.jpg' %}" alt="Slide 2">
+        <div class="slide-text">
+            <span class="highlight">#2 SPOTLIGHT</span>
+            <h1>Bleach</h1>
+            <p>Ichigo Kurosaki becomes a Soul Reaper to protect his city from Hollows.After a brutal surprise attack by the forces of Quincy King Yhwach,the resident Reapers of the Soul Society lick their wounds and mourn their losses. Many of the surviving Soul Reaper captains train to battle without their Bankai,the ultimate technique wielded..+ More</p>
+            <a href="#" class="explore-button">Watch Now</a>
+        </div>
+    </div>
+
+    <div class="slide">
+        <img class="slide-image" src="{% static 'animes/images/drstones_full.jpg' %}" alt="Slide 3">
+        <div class="slide-text">
+            <span class="highlight">#3 SPOTLIGHT</span>
+            <h1>Dr. Stone</h1>
+            <p>Rebuild civilization with science after the world turns to stone.
+            Asta and Yuno were abandoned at the same church on the same day. Raised together as children, they came to know of the "Wizard King"—a title given to the strongest mage in the kingdom—and promised that they would compete against each other for the position of the...+ More</p>
+            <a href="#" class="explore-button">Start Watching</a>
+        </div>
+    </div>
+</div>
+
+<h2 style="color: #ff66b2; margin-left: 20px;">🔥 Trending</h2>
+<div class="carousel-wrapper">
+    <button class="carousel-btn left" onclick="scrollLeft()">❮</button>
+
+    <div class="carousel" id="trendingCarousel">
+        <!-- Example image cards -->
+        <div class="carousel-item">
+            <img src="{% static 'animes/images/gachiakunta.jpg' %}" alt="Gachiakuta">
+            <p>01<br><strong>Gachiakuta</strong></p>
+        </div>
+        <div class="carousel-item">
+            <img src="{% static 'animes/images/drstone.jpg' %}" alt="My Dress-Up Darling">
+            <p>02<br><strong>Dr Stone </strong></p>
+        </div>
+        <div class="carousel-item">
+            <img src="{% static 'animes/images/bleach.jpg' %}" alt="Grand Blue Dreaming">
+            <p>03<br><strong>Bleach </strong></p>
+        </div>
+        <div class="carousel-item">
+            <img src="{% static 'animes/images/demonslayer.jpg' %}" alt="Detectives">
+            <p>04<br><strong>Demon Slayer</strong></p>
+        </div>
+        <div class="carousel-item">
+            <img src="{% static 'animes/images/clevatess.jpg' %}" alt="Clevatess">
+            <p>05<br><strong>Clevatess</strong></p>
+        </div>
+        <div class="carousel-item">
+            <img src="{% static 'animes/images/naruto.jpg' %}" alt="Naruto Shippuden">
+            <p>10<br><strong>Naruto: Shippuden</strong></p>
+        </div>
+        <!-- Add more as needed -->
+    </div>
+
+    <button class="carousel-btn right" onclick="scrollRight()">❯</button>
+</div>
+
+
+<script>
+let currentSlide = 0;
+const slides = document.querySelectorAll('.slide');
+
+function showSlide(index) {
+    slides.forEach((slide, i) => {
+        slide.classList.remove('active');
+    });
+    slides[index].classList.add('active');
+}
+
+function nextSlide() {
+    currentSlide = (currentSlide + 1) % slides.length;
+    showSlide(currentSlide);
+}
+
+showSlide(currentSlide);
+setInterval(nextSlide, 4000); // switch every 4s
+</script>
+
+
+
+
+
+
+
+{% endblock %}
