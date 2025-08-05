@@ -70,11 +70,16 @@ def add_to_watchlist(request, anime_id):
     return redirect('anime_detail', anime_id=anime_id)
 
 def anime_list(request):
-    # Sample anime data (later you can fetch from your model)
     animes = [
         {"title": "One Piece", "image": "onepiece.jpg"},
         {"title": "Demon Slayer", "image": "demonslayer.jpg"},
-        {"title": "Attack on Titan", "image": "aot2.jpg"},
-        # Add more...
+        {"title": "Attack on Titan", "image": "aot.jpg"},
+        {"title": "Jujutsu Kaisen", "image": "jujutsukaisen.jpg"},
+        {"title": "Chainsaw Man", "image": "chainsawman.jpg"},
+        {"title": "Naruto", "image": "naruto.jpg"},
+        {"title": "My Hero Academia", "image": "myheroacademia.jpg"},
+        {"title": "Tokyo Revengers", "image": "tokyorevengers.jpg"},
+        {"title": "Bleach", "image": "bleach.jpg"},
     ]
     return render(request, 'anime_list.html', {'animes': animes})
+

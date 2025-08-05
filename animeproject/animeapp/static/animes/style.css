@@ -345,3 +345,39 @@ h1, h2, h3 {
     border-radius: 5px;
     text-align: center;
 }
+.anime-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 16px;
+    padding: 20px;
+    justify-items: center;
+}
+
+.anime-card {
+    background: transparent; /* or keep a dark bg if needed */
+    padding: 4px;             /* tighter padding */
+    border-radius: 4px;
+    text-align: center;
+    transition: transform 0.2s;
+    box-shadow: none;         /* remove shadow if not needed */
+    width: fit-content;       /* adjust width to content */
+}
+
+.anime-card img {
+    width: 120px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-bottom: 4px;
+}
+
+.anime-card h3 {
+    color: #ff4da6;
+    font-size: 0.85rem;
+    margin: 0;
+}
+
+.anime-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 4px 8px rgba(255, 77, 166, 0.3);
+}
