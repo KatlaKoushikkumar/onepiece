@@ -6,10 +6,22 @@ from django.contrib.auth.decorators import login_required
 
 def home(request):
     query = request.GET.get('q')
-    animes = Anime.objects.all()
     if query:
-        animes = animes.filter(title__icontains=query)
-    return render(request, 'home.html', {'animes': animes})
+        animes = Anime.objects.filter(title__icontains=query)
+        if not animes.exists():
+            return render(request, 'home.html', {
+                'animes': [],
+                'search_query': query,
+                'not_found': True
+            })
+    else:
+        animes = Anime.objects.all()
+
+    return render(request, 'home.html', {
+        'animes': animes,
+        'search_query': query,
+        'not_found': False
+    })
 
 def anime_detail(request, anime_id):
     anime = get_object_or_404(Anime, id=anime_id)
@@ -56,3 +68,13 @@ def add_to_watchlist(request, anime_id):
     anime = get_object_or_404(Anime, id=anime_id)
     WatchList.objects.get_or_create(user=request.user, anime=anime)
     return redirect('anime_detail', anime_id=anime_id)
+
+def anime_list(request):
+    # Sample anime data (later you can fetch from your model)
+    animes = [
+        {"title": "One Piece", "image": "onepiece.jpg"},
+        {"title": "Demon Slayer", "image": "demonslayer.jpg"},
+        {"title": "Attack on Titan", "image": "aot2.jpg"},
+        # Add more...
+    ]
+    return render(request, 'anime_list.html', {'animes': animes})

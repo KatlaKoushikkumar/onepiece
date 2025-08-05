@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import home,signup_view,login_view,logout_view,watchlist_view,add_to_watchlist,anime_detail
+from .views import home,signup_view,login_view,logout_view,watchlist_view,add_to_watchlist,anime_detail,anime_list
 
 urlpatterns = [
     path('', home, name='home'),
@@ -9,4 +9,5 @@ urlpatterns = [
     path('logout/', logout_view, name='logout'),
     path('watchlist/', watchlist_view, name='watchlist'),
     path('add-to-watchlist/<int:anime_id>/', add_to_watchlist, name='add_to_watchlist'),
+    path('anime-list/', anime_list, name='anime_list'),
 ]
